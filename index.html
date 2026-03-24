@@ -17,7 +17,8 @@
       display: flex;
       justify-content: center; /* always center horizontally */
       align-items: center;
-      gap: 20px; /* gap between two cards later */
+      gap: 40px; /* gap between two cards when they appear */
+      position: relative;
     }
 
     .card {
@@ -36,6 +37,7 @@
     .hidden {
       opacity: 0;
       pointer-events: none;
+      transform: scale(0.8);
     }
 
     .arrow-btn {
@@ -50,7 +52,10 @@
       cursor: pointer;
       user-select: none;
       transition: opacity 0.5s ease;
-      margin-left: 20px;
+      position: absolute;
+      right: -70px; /* position arrow outside initial card */
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     .arrow-btn:hover {
@@ -61,13 +66,13 @@
 <body>
 
   <div class="container" id="container">
-    <!-- TITLE CARD -->
+    <!-- INITIAL CENTER CARD -->
     <div class="card" id="titleCard">
       <h2>Title Here</h2>
     </div>
 
     <!-- ARROW BUTTON -->
-    <div class="arrow-btn" id="arrowBtn" onclick="showSplit()">▶</div>
+    <div class="arrow-btn" id="arrowBtn" onclick="splitCards()">▶</div>
 
     <!-- LEFT CARD -->
     <div class="card hidden" id="leftCard">
@@ -81,17 +86,18 @@
   </div>
 
   <script>
-    function showSplit() {
+    function splitCards() {
       const title = document.getElementById("titleCard");
+      const arrow = document.getElementById("arrowBtn");
       const left = document.getElementById("leftCard");
       const right = document.getElementById("rightCard");
-      const arrow = document.getElementById("arrowBtn");
 
       // Fade out title card and arrow
       title.style.opacity = "0";
       arrow.style.opacity = "0";
 
       setTimeout(() => {
+        // Hide initial card and arrow
         title.classList.add("hidden");
         arrow.classList.add("hidden");
 
