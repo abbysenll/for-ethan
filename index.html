@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Card 💌</title>
+
+  <style>
+    body {
+      background: #fff;
+      text-align: center;
+      font-family: Arial;
+      margin: 0;
+    }
+
+    .page {
+      display: none;
+      padding: 60px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background-color: lightgray;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PAGE 1 -->
+  <div id="page1" class="page" style="display:block;">
+    <h1>Page 1</h1>
+    <p>Write here</p>
+    <button onclick="nextPage('page2')">Next</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div id="page2" class="page">
+    <h1>Page 2</h1>
+    <p>Write here</p>
+    <button onclick="nextPage('page3')">Next</button>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div id="page3" class="page">
+    <h1>Page 3</h1>
+    <p>Write here</p>
+    <button onclick="nextPage('page1')">Back to start</button>
+  </div>
+
+  <script>
+    function nextPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+      document.getElementById(pageId).style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
