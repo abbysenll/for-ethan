@@ -15,14 +15,15 @@
 
     .container {
       display: flex;
-      align-items: center;
       justify-content: center; /* center everything horizontally */
-      gap: 20px; /* more space for bigger cards */
+      align-items: center;
+      gap: 20px; /* space between two cards later */
+      transition: all 0.4s ease;
     }
 
     .card {
-      width: 300px; /* bigger width */
-      height: 400px; /* bigger height */
+      width: 300px;
+      height: 400px;
       background: white;
       border: 2px solid black;
       display: flex;
@@ -61,43 +62,47 @@
 </head>
 <body>
 
-  <div class="container">
+  <div class="container" id="container">
 
-    <!-- LEFT PANEL -->
-    <div class="card" id="leftCard">
+    <!-- TITLE CARD -->
+    <div class="card" id="titleCard">
       <h2>Title Here</h2>
     </div>
 
-    <!-- RIGHT ARROW BUTTON -->
-    <div class="arrow-btn" onclick="openCard()">▶</div>
+    <!-- ARROW BUTTON -->
+    <div class="arrow-btn" id="arrowBtn" onclick="openCards()">▶</div>
 
-    <!-- RIGHT PANEL 1 -->
-    <div class="card hidden" id="card1">
-      <p>Text here</p>
+    <!-- LEFT CARD -->
+    <div class="card hidden" id="leftCard">
+      <p>Left text</p>
     </div>
 
-    <!-- RIGHT PANEL 2 -->
-    <div class="card hidden" id="card2">
-      <p>More text here</p>
+    <!-- RIGHT CARD -->
+    <div class="card hidden" id="rightCard">
+      <p>Right text</p>
     </div>
 
   </div>
 
   <script>
-    function openCard() {
+    function openCards() {
+      const title = document.getElementById("titleCard");
       const left = document.getElementById("leftCard");
-      const c1 = document.getElementById("card1");
-      const c2 = document.getElementById("card2");
+      const right = document.getElementById("rightCard");
+      const arrow = document.getElementById("arrowBtn");
 
-      // Animate left card disappearance
-      left.style.transform = "scale(0.8)";
-      left.style.opacity = "0";
+      // Animate title card disappearance
+      title.style.transform = "scale(0.8)";
+      title.style.opacity = "0";
+      arrow.style.opacity = "0";
 
       setTimeout(() => {
-        left.classList.add("hidden");
-        // Show right cards
-        c1.classList.remove("hidden");
-        c2.classList.remove("hidden");
+        title.classList.add("hidden");
+        arrow.classList.add("hidden");
+
+        // Show left and right cards
+        left.classList.remove("hidden");
+        right.classList.remove("hidden");
       }, 300);
     }
   </script>
