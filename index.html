@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Overlay Side-by-Side Cards</title>
+  <title>Card With Arrows</title>
   <style>
     body {
       margin: 0;
@@ -15,12 +15,43 @@
 
     .container {
       position: relative;
-      width: 800px;   /* double the original width to fit side by side */
-      height: 700px;  /* same as original height */
+      width: 800px;   /* double card width for overlay cards */
+      height: 800px;  /* a little extra space for arrows */
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
 
+    /* Arrows */
+    .arrow {
+      position: absolute;
+      top: 0;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border: 2px solid black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.3s ease;
+    }
+
+    #leftArrow {
+      left: 200px; /* left arrow above left side of card */
+      opacity: 0; /* initially hidden */
+    }
+
+    #rightArrow {
+      right: 200px; /* right arrow above right side of card */
+      opacity: 1; /* initially visible */
+    }
+
+    /* Cards */
     .card {
-      width: 400px;   /* original card size */
+      width: 400px;
       height: 700px;
       background: white;
       border: 2px solid black;
@@ -31,51 +62,81 @@
       font-size: 24px;
       font-weight: bold;
       position: absolute;
-      top: 0;
+      top: 50px; /* space for arrows above */
       transition: opacity 0.5s ease;
     }
 
-    /* Original card in center */
+    /* Original card centered */
     #originalCard {
       left: 200px; /* center in 800px container */
     }
 
-    /* Left overlay card */
+    /* Overlay cards side by side */
     #leftCard {
       left: 0;
+      opacity: 0;
     }
 
-    /* Right overlay card */
     #rightCard {
       left: 400px;
+      opacity: 0;
     }
 
     .hidden {
       opacity: 0;
       pointer-events: none;
     }
+
+    .visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
   </style>
 </head>
 <body>
 
   <div class="container">
-    <!-- Original card -->
+    <!-- Arrows -->
+    <div class="arrow" id="leftArrow">&#8592;</div>
+    <div class="arrow" id="rightArrow">&#8594;</div>
+
+    <!-- Cards -->
     <div class="card" id="originalCard">Title</div>
-
-    <!-- Left overlay card -->
-    <div class="card hidden" id="leftCard">Left</div>
-
-    <!-- Right overlay card -->
-    <div class="card hidden" id="rightCard">Right</div>
+    <div class="card" id="leftCard">Left</div>
+    <div class="card" id="rightCard">Right</div>
   </div>
 
   <script>
-    // Example: show overlay cards after 1 second
-    setTimeout(() => {
-      document.getElementById('originalCard').classList.add('hidden');
-      document.getElementById('leftCard').classList.remove('hidden');
-      document.getElementById('rightCard').classList.remove('hidden');
-    }, 1000);
+    let step = 0;
+
+    const leftArrow = document.getElementById('leftArrow');
+    const rightArrow = document.getElementById('rightArrow');
+    const originalCard = document.getElementById('originalCard');
+    const leftCard = document.getElementById('leftCard');
+    const rightCard = document.getElementById('rightCard');
+
+    rightArrow.addEventListener('click', () => {
+      if (step === 0) {
+        // Step 1: show left arrow
+        leftArrow.style.opacity = '1';
+        step = 1;
+      } else if (step === 1) {
+        // Step 2: show overlay cards, hide original
+        originalCard.classList.add('hidden');
+        leftCard.style.opacity = '1';
+        rightCard.style.opacity = '1';
+        step = 2;
+      }
+    });
+
+    leftArrow.addEventListener('click', () => {
+      // Optional: can go back to previous step if you want
+      if (step === 1) {
+        leftArrow.style.opacity = '0';
+        step = 0;
+      }
+    });
   </script>
 
 </body>
