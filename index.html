@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Card</title>
+  <title>Card Split Animation</title>
   <style>
     body {
       margin: 0;
@@ -15,9 +15,9 @@
 
     .container {
       display: flex;
-      justify-content: center; /* center everything horizontally */
+      justify-content: center; /* center horizontally */
       align-items: center;
-      gap: 20px; /* space between two cards later */
+      gap: 20px;
       transition: all 0.4s ease;
     }
 
@@ -31,12 +31,12 @@
       align-items: center;
       text-align: center;
       padding: 20px;
-      transition: transform 0.4s ease, opacity 0.4s ease;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      position: relative;
     }
 
     .hidden {
       opacity: 0;
-      transform: scale(0.8);
       pointer-events: none;
     }
 
@@ -51,7 +51,8 @@
       font-size: 25px;
       cursor: pointer;
       user-select: none;
-      transition: background 0.2s;
+      transition: background 0.2s, opacity 0.5s;
+      margin-left: 20px;
     }
 
     .arrow-btn:hover {
@@ -70,7 +71,7 @@
     </div>
 
     <!-- ARROW BUTTON -->
-    <div class="arrow-btn" id="arrowBtn" onclick="openCards()">▶</div>
+    <div class="arrow-btn" id="arrowBtn" onclick="splitCards()">▶</div>
 
     <!-- LEFT CARD -->
     <div class="card hidden" id="leftCard">
@@ -85,24 +86,28 @@
   </div>
 
   <script>
-    function openCards() {
+    function splitCards() {
       const title = document.getElementById("titleCard");
       const left = document.getElementById("leftCard");
       const right = document.getElementById("rightCard");
       const arrow = document.getElementById("arrowBtn");
 
-      // Animate title card disappearance
+      // Animate title disappearing
       title.style.transform = "scale(0.8)";
       title.style.opacity = "0";
       arrow.style.opacity = "0";
 
+      // Show left and right cards and slide them out
       setTimeout(() => {
         title.classList.add("hidden");
         arrow.classList.add("hidden");
 
-        // Show left and right cards
         left.classList.remove("hidden");
         right.classList.remove("hidden");
+
+        // Slide left and right cards out from center
+        left.style.transform = "translateX(-160px)";
+        right.style.transform = "translateX(160px)";
       }, 300);
     }
   </script>
