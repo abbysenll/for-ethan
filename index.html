@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Perfectly Centered Cards</title>
+  <title>Title</title>
   <style>
     body {
       margin: 0;
@@ -13,99 +13,25 @@
       font-family: Arial, sans-serif;
     }
 
-    .cards-wrapper {
-      display: flex;
-      justify-content: center; /* center cards group */
-      align-items: center;
-      gap: 40px; /* space between two cards later */
-      position: relative;
-    }
-
     .card {
-      width: 300px;
-      height: 400px;
+      width: 400px;   /* large rectangle */
+      height: 300px;
       background: white;
       border: 2px solid black;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 20px;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: scale(0.8);
-    }
-
-    .arrow-btn {
-      width: 50px;
-      height: 50px;
-      border: 2px solid black;
-      background: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 25px;
-      cursor: pointer;
-      user-select: none;
-      position: absolute;
-      right: -70px; /* outside wrapper */
-      top: 50%;
-      transform: translateY(-50%);
-      transition: opacity 0.5s ease;
-    }
-
-    .arrow-btn:hover {
-      background: #e0e0e0;
+      font-size: 24px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
 
-  <div class="cards-wrapper" id="cardsWrapper">
-    <!-- INITIAL CENTER CARD -->
-    <div class="card" id="titleCard">
-      <h2>Title Here</h2>
-    </div>
-
-    <!-- LEFT CARD -->
-    <div class="card hidden" id="leftCard">
-      <p>Left text</p>
-    </div>
-
-    <!-- RIGHT CARD -->
-    <div class="card hidden" id="rightCard">
-      <p>Right text</p>
-    </div>
-
-    <!-- ARROW BUTTON overlayed -->
-    <div class="arrow-btn" id="arrowBtn" onclick="splitCards()">▶</div>
+  <div class="card">
+    Title
   </div>
-
-  <script>
-    function splitCards() {
-      const title = document.getElementById("titleCard");
-      const arrow = document.getElementById("arrowBtn");
-      const left = document.getElementById("leftCard");
-      const right = document.getElementById("rightCard");
-
-      // Fade out title card and arrow
-      title.style.opacity = "0";
-      arrow.style.opacity = "0";
-
-      setTimeout(() => {
-        title.classList.add("hidden");
-        arrow.classList.add("hidden");
-
-        // Show left and right cards
-        left.classList.remove("hidden");
-        right.classList.remove("hidden");
-      }, 400);
-    }
-  </script>
 
 </body>
 </html>
